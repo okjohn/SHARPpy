@@ -1,8 +1,8 @@
-''' Frequently used constants '''
+''' Frequently used meteorological constants '''
 
 __all__ = ['RMISSD', 'ROCP', 'ZEROCNK', 'G', 'TOL']
 
-# constants
+# Meteorological Constants
 MISSING = -9999.0       # Missing Flag
 ROCP = 0.28571426       # R over Cp
 ZEROCNK = 273.15        # Zero Celsius in Kelvins
