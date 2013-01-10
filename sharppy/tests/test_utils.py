@@ -23,8 +23,8 @@ def test_vec2comp_array_like():
         21.213203435596423, 35, 28.284271247461909, 0]
     correct_v = [-5, -7.0710678118654746, 0, 14.142135623730951, 25,
         21.213203435596423, 0, -28.284271247461909, -45]
-    correct_u = np.asarray(correct_u)
-    correct_v = np.asarray(correct_v)
+    correct_u = np.asanyarray(correct_u).astype(np.float64)
+    correct_v = np.asanyarray(correct_v).astype(np.float64)
     returned_u, returned_v = utils.vec2comp(input_wdir, input_wspd)
     npt.assert_almost_equal(returned_u, correct_u)
     npt.assert_almost_equal(returned_v, correct_v)
@@ -34,8 +34,8 @@ def test_vec2comp_zeros():
     input_wspd = [10, 20, 30, 40, 50]
     correct_u = [0, -20, 0, 40, 0]
     correct_v = [-10, 0, 30, 0, -50]
-    correct_u = np.asarray(correct_u)
-    correct_v = np.asarray(correct_v)
+    correct_u = np.asanyarray(correct_u).astype(np.float64)
+    correct_v = np.asanyarray(correct_v).astype(np.float64)
     returned_u, returned_v = utils.vec2comp(input_wdir, input_wspd)
     npt.assert_equal(returned_u, correct_u)
     npt.assert_equal(returned_v, correct_v)
@@ -52,8 +52,8 @@ def test_vec2comp_default_missing_val_array():
     input_wspd = [MISSING, 10, 20, 30]
     correct_u = [MISSING, -10, 0, MISSING]
     correct_v= [MISSING, 0, 20, MISSING]
-    correct_u = ma.asarray(correct_u)
-    correct_v = ma.asarray(correct_v)
+    correct_u = ma.asanyarray(correct_u).astype(np.float64)
+    correct_v = ma.asanyarray(correct_v).astype(np.float64)
     correct_u[correct_u == MISSING] = ma.masked
     correct_v[correct_v == MISSING] = ma.masked
     correct_u[correct_v.mask] = ma.masked
@@ -78,8 +78,8 @@ def test_vec2comp_user_missing_val_array():
     input_wspd = [missing, 10, 20, 30]
     correct_u = [missing, -10, 0, missing]
     correct_v= [missing, 0, 20, missing]
-    correct_u = ma.asarray(correct_u)
-    correct_v = ma.asarray(correct_v)
+    correct_u = ma.asanyarray(correct_u).astype(np.float64)
+    correct_v = ma.asanyarray(correct_v).astype(np.float64)
     correct_u[correct_u == missing] = ma.masked
     correct_v[correct_v == missing] = ma.masked
     correct_u[correct_v.mask] = ma.masked
