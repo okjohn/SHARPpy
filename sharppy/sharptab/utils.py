@@ -189,8 +189,8 @@ def vec2comp(wdir, wspd, missing=MISSING):
         V-component of the wind (units are the same as those of input speed)
 
     '''
-    wdir = ma.asarray(wdir)
-    wspd = ma.asarray(wspd)
+    wdir = ma.asanyarray(wdir).astype(np.float64)
+    wspd = ma.asanyarray(wspd).astype(np.float64)
     wdir.set_fill_value(missing)
     wspd.set_fill_value(missing)
     assert wdir.shape == wspd.shape, 'wdir and wspd have different shapes'
