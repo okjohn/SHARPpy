@@ -145,7 +145,21 @@ def FT2M(val):
 
 def _vec2comp(wdir, wspd):
     '''
+    Underlying function that converts a vector to its components
 
+    Parameters
+    ----------
+    wdir : number, masked_array
+        Angle in meteorological degrees
+    wspd : number, masked_array
+        Magnitudes of wind vector
+
+    Returns
+    -------
+    u : number, masked_array (same as input)
+        U-component of the wind
+    v : number, masked_array (same as input)
+        V-component of the wind
 
     '''
     u = wspd * ma.sin(np.radians(wdir % 360.)) * -1
