@@ -141,3 +141,67 @@ def FT2M(val):
 
     '''
     return val * 0.3048
+
+
+def _vec2comp(wdir, wspd):
+    '''
+
+
+    '''
+    u = wspd * ma.sin(np.radians(wdir % 360.)) * -1
+    v = wspd * ma.cos(np.radians(wdir % 360.)) * -1
+    return u, v
+
+
+def vec2comp(wdir, wspd, missing=MISSING):
+    '''
+    Convert direction and magnitude into U, V components
+
+    Parameters
+    ----------
+    wdir : float
+        Angle in meteorological degrees
+    wspd : float
+        Magnitudes of wind vector (input units == output units)
+    missing : float (optional)
+        Optional missing parameter. If not given, assume default missing
+        value from sharppy.sharptab.constants.MISSING
+
+    Returns
+    -------
+    u : float
+        U-component of the wind (units are the same as those of input speed)
+    v : float
+        V-component of the wind (units are the same as those of input speed)
+
+    '''
+    wdir = ma.asarray(wdir)
+    wspd = ma.asarray(wspd)
+    wdir.set_fill_value(missing)
+    wspd.set_fill_value(missing)
+    assert wdir.shape == wspd.shape, 'wdir and wspd have different shapes'
+    if wdir.shape:
+        wdir[wdir == missing] = ma.masked
+        wspd[wspd == missing] = ma.masked
+        wdir[wspd.mask] = ma.masked
+        wspd[wdir.mask] = ma.masked
+        u, v = _vec2comp(wdir, wspd)
+        u[np.fabs(u) < TOL] = 0.
+        v[np.fabs(v) < TOL] = 0.
+    else:
+        if wdir == missing:
+            wdir = ma.masked
+            wspd = ma.masked
+        elif wspd == missing:
+            wdir = ma.masked
+            wspd = ma.masked
+        u, v = _vec2comp(wdir, wspd)
+        if ma.fabs(u) < TOL:
+            u = 0.
+        if ma.fabs(v) < TOL:
+            v = 0.
+    return u, v
+
+
+
+
