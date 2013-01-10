@@ -173,19 +173,19 @@ def vec2comp(wdir, wspd, missing=MISSING):
 
     Parameters
     ----------
-    wdir : float
+    wdir : number, array_like
         Angle in meteorological degrees
-    wspd : float
+    wspd : number, array_like
         Magnitudes of wind vector (input units == output units)
-    missing : float (optional)
+    missing : number (optional)
         Optional missing parameter. If not given, assume default missing
         value from sharppy.sharptab.constants.MISSING
 
     Returns
     -------
-    u : float
+    u : number, array_like (same as input)
         U-component of the wind (units are the same as those of input speed)
-    v : float
+    v : number, array_like (same as input)
         V-component of the wind (units are the same as those of input speed)
 
     '''
