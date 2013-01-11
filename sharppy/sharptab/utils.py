@@ -217,5 +217,79 @@ def vec2comp(wdir, wspd, missing=MISSING):
     return u, v
 
 
+def comp2vec(u, v, missing=MISSING):
+    '''
+    Convert U, V components into direction and magnitude
+
+    Parameters
+    ----------
+    u : number, array_like
+        U-component of the wind
+    v : number, array_like
+        V-component of the wind
+    missing : number (optional)
+        Optional missing parameter. If not given, assume default missing
+        value from sharppy.sharptab.constants.MISSING
+
+    Returns
+    -------
+    wdir : number, array_like (same as input)
+        Angle in meteorological degrees
+    wspd : number, array_like (same as input)
+        Magnitudes of wind vector (input units == output units)
+
+    '''
+    u = ma.asanyarray(u).astype(np.float64)
+    v = ma.asanyarray(v).astype(np.float64)
+    u.set_fill_value(missing)
+    v.set_fill_value(missing)
+    wdir = np.degrees(np.arctan2(-u, -v))
+    if wdir.shape:
+        u[u == missing] = ma.masked
+        v[v == missing] = ma.masked
+        wdir[u.mask] = ma.masked
+        wdir[v.mask] = ma.masked
+        wdir[wdir < 0] += 360
+        wdir[np.fabs(wdir) < TOL] = 0.
+    else:
+        if u == missing or v == missing:
+            return ma.masked, ma.masked
+        if wdir < 0:
+            wdir += 360
+    return wdir, mag(u, v)
+
+
+def mag(u, v, missing=MISSING):
+    '''
+    Compute the magnitude of a vector from its components
+
+    Parameters
+    ----------
+    u : number, array_like
+        U-component of the wind
+    v : number, array_like
+        V-component of the wind
+    missing : number (optional)
+        Optional missing parameter. If not given, assume default missing
+        value from sharppy.sharptab.constants.MISSING
+
+    Returns
+    -------
+    mag : number, array_like
+        The magnitude of the vector (units are the same as input)
+
+    '''
+    u = np.ma.asanyarray(u).astype(np.float64)
+    v = np.ma.asanyarray(v).astype(np.float64)
+    u.set_fill_value(missing)
+    v.set_fill_value(missing)
+    if u.shape:
+        u[u == missing] = ma.masked
+        v[v == missing] = ma.masked
+    else:
+        if u == missing or v == missing:
+            return ma.masked
+    return ma.sqrt(u**2 + v**2)
+
 
 
