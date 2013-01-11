@@ -16,10 +16,39 @@ class Profile(object):
 
         Parameters
         ----------
+        Mandatory Keywords
+            pres : array_like
+                The pressure values (Hectopaschals)
+            hght : array_like
+                The corresponding height values (Meters)
+            tmpc : array_like
+                The corresponding temperature values (Celsius)
+            dwpc : array_like
+                The corresponding dewpoint temperature values (Celsius)
+
+        Optional Keyword Pairs (must use one or the other)
+            wdir : array_like
+                The direction from which the wind is blowing in
+                meteorological degrees
+            wspd : array_like
+                The speed of the wind
+
+            OR
+
+            u : array_like
+                The U-component of the direction from which the wind
+                is blowing
+            v : array_like
+                The V-component of the direction from which the wind
+                is blowing.
+
+        Optional Keywords
+            missing : number (default: sharppy.sharptab.constants.MISSING)
+                The value of the missing flag
 
         Returns
         -------
-
+        A profile object
 
         '''
         self.missing = kwargs.get('missing', MISSING)
