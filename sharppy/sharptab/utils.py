@@ -256,6 +256,8 @@ def comp2vec(u, v, missing=MISSING):
             return ma.masked, ma.masked
         if wdir < 0:
             wdir += 360
+        if np.fabs(wdir) < TOL:
+            wdir = 0.
     return wdir, mag(u, v)
 
 
