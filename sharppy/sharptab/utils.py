@@ -4,7 +4,7 @@ import numpy.ma as ma
 from sharppy.sharptab.constants import MISSING, TOL
 
 __all__ = ['MS2KTS', 'KTS2MS', 'MS2MPH', 'MPH2MS', 'MPH2KTS', 'KTS2MPH']
-__all__ += ['M2FT', 'FT2M']
+__all__ += ['M2FT', 'FT2M', 'vec2comp', 'comp2vec', 'mag']
 
 
 def MS2KTS(val):
