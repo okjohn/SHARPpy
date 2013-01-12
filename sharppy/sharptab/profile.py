@@ -103,5 +103,5 @@ class Profile(object):
         Index of the surface
 
         '''
-        return np.where(self.tmpc.filled() != self.missing)[0].min()
+        return np.where(~self.tmpc.mask)[0].min()
 
