@@ -1,6 +1,6 @@
 ''' Frequently used meteorological constants '''
 
-__all__ = ['RMISSD', 'ROCP', 'ZEROCNK', 'G', 'TOL']
+__all__ = ['MISSING', 'ROCP', 'ZEROCNK', 'G', 'TOL']
 
 # Meteorological Constants
 MISSING = -9999.0       # Missing Flag
