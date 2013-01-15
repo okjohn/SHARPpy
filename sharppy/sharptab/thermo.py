@@ -13,11 +13,11 @@ def theta(p, t, p2=1000.):
 
     Parameters
     ----------
-    p : number, array_like
+    p : number, numpy_array
         The pressure of the parcel (hPa)
-    t : number, array_like
+    t : number, numpy_array
         Temperature of the parcel (C)
-    p2 : number, array_like (default 1000.)
+    p2 : number, numpy_array (default 1000.)
         Reference pressure level (hPa)
 
     Returns
@@ -34,7 +34,7 @@ def ctof(t):
 
     Parameters
     ----------
-    t : number, array_like
+    t : number, numpy_array
         The temperature in Celsius
 
     Returns
@@ -51,7 +51,7 @@ def ftoc(t):
 
     Parameters
     ----------
-    t : number, array_like
+    t : number, numpy_array
         The temperature in Fahrenheit
 
     Returns
@@ -68,7 +68,7 @@ def ktoc(t):
 
     Parameters
     ----------
-    t : number, array_like
+    t : number, numpy_array
         The temperature in Kelvin
 
     Returns
@@ -85,7 +85,7 @@ def ctok(t):
 
     Parameters
     ----------
-    t : number, array_like
+    t : number, numpy_array
         The temperature in Celsius
 
     Returns
@@ -102,7 +102,7 @@ def ktof(t):
 
     Parameters
     ----------
-    t : number, array_like
+    t : number, numpy_array
         The temperature in Kelvin
 
     Returns
@@ -119,7 +119,7 @@ def ftok(t):
 
     Parameters
     ----------
-    t : number, array_like
+    t : number, numpy_array
         The temperature in Fahrenheit
 
     Returns
