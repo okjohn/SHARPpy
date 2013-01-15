@@ -1,9 +1,31 @@
 ''' Thermodynamic Library '''
+from __future__ import division
 import numpy as np
 import numpy.ma as ma
 from sharppy.sharptab.constants import *
 
 __all__ = ['ftoc', 'ctof', 'ctok', 'ktoc', 'ftok', 'ktof']
+
+
+def theta(p, t, p2=1000.):
+    '''
+    Returns the potential temperature (C) of a parcel.
+
+    Parameters
+    ----------
+    p : number, array_like
+        The pressure of the parcel (hPa)
+    t : number, array_like
+        Temperature of the parcel (C)
+    p2 : number, array_like (default 1000.)
+        Reference pressure level (hPa)
+
+    Returns
+    -------
+    Potential temperature (C)
+
+    '''
+    return ((t + ZEROCNK) * (p2 / p)**ROCP) - ZEROCNK
 
 
 def ctof(t):
