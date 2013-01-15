@@ -2,6 +2,7 @@ import numpy as np
 import numpy.ma as ma
 import numpy.testing as npt
 import sharppy.sharptab.thermo as thermo
+from sharppy.sharptab.constants import *
 
 
 def test_ctof():
@@ -200,4 +201,29 @@ def test_ftok():
     correct_k[inds] = ma.masked
     returned_k = thermo.ftok(input_f)
     npt.assert_almost_equal(returned_k, correct_k)
+
+
+def test_theta():
+    # single
+    input_p = 940
+    input_t = 5
+    input_p2 = 1000.
+    correct_theta = 9.961049492262532
+    returned_theta = thermo.theta(input_p, input_t, input_p2)
+    npt.assert_almost_equal(returned_theta, correct_theta)
+
+    # array
+    input_p = np.asarray([940, 850])
+    input_t = np.asarray([5, 10])
+    input_p2 = np.asarray([1000., 1000.])
+    correct_theta = [9.961049492262532, 23.457812111895066]
+    returned_theta = thermo.theta(input_p, input_t, input_p2)
+    npt.assert_almost_equal(returned_theta, correct_theta)
+
+
+
+
+
+
+
 
