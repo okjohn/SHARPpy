@@ -13,7 +13,7 @@ def MS2KTS(val):
 
     Parameters
     ----------
-    val : float
+    val : float, numpy_array
         Speed (m/s)
 
     Returns
@@ -30,7 +30,7 @@ def KTS2MS(val):
 
     Parameters
     ----------
-    val : float
+    val : float, numpy_array
         Speed (kts)
 
     Returns
@@ -47,7 +47,7 @@ def MS2MPH(val):
 
     Parameters
     ----------
-    val : float
+    val : float, numpy_array
         Speed (m/s)
 
     Returns
@@ -64,7 +64,7 @@ def MPH2MS(val):
 
     Parameters
     ----------
-    val : float
+    val : float, numpy_array
         Speed (mph)
 
     Returns
@@ -81,7 +81,7 @@ def MPH2KTS(val):
 
     Parameters
     ----------
-    val : float
+    val : float, numpy_array
         Speed (mph)
 
     Returns
@@ -98,7 +98,7 @@ def KTS2MPH(val):
 
     Parameters
     ----------
-    val : float
+    val : float, numpy_array
         Speed (kts)
 
     Returns
@@ -115,7 +115,7 @@ def M2FT(val):
 
     Parameters
     ----------
-    val : float
+    val : float, numpy_array
         Distance (m)
 
     Returns
@@ -132,7 +132,7 @@ def FT2M(val):
 
     Parameters
     ----------
-    val : float
+    val : float, numpy_array
         Distance (ft)
 
     Returns
