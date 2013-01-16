@@ -235,6 +235,20 @@ def test_wobf():
     npt.assert_almost_equal(returned_c, correct_c)
 
 
+def test_lcltemp():
+    input_t = 10
+    input_td = 5
+    correct_t = 3.89818375
+    returned_t = thermo.lcltemp(input_t, input_td)
+    npt.assert_almost_equal(returned_t, correct_t)
+
+    input_t = np.asanyarray([20, 10, 0, -5])
+    input_td = np.asanyarray([15, 8, -1, -10])
+    correct_t = [13.83558375, 7.54631416, -1.21632173, -11.00791625]
+    correct_t = np.asanyarray(correct_t)
+    returned_t = thermo.lcltemp(input_t, input_td)
+    npt.assert_almost_equal(returned_t, correct_t)
+
 
 
 
