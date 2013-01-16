@@ -4,7 +4,7 @@ import numpy as np
 import numpy.ma as ma
 from sharppy.sharptab.constants import *
 
-__all__ = ['ftoc', 'ctof', 'ctok', 'ktoc', 'ftok', 'ktof']
+__all__ = ['theta', 'wobf', 'ftoc', 'ctof', 'ctok', 'ktoc', 'ftok', 'ktof']
 
 
 def theta(p, t, p2=1000.):
