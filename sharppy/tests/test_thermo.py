@@ -221,6 +221,19 @@ def test_theta():
     npt.assert_almost_equal(returned_theta, correct_theta)
 
 
+def test_wobf():
+    input_t = 10
+    correct_c = 10.192034543230415
+    returned_c = thermo.wobf(input_t)
+    npt.assert_almost_equal(returned_c, correct_c)
+
+    input_t = [10, 0, -10]
+    input_t = np.asanyarray(input_t)
+    correct_c = [10.192034543230415, 6.411053315058521, 3.8633154447163114]
+    correct_c = np.asanyarray(correct_c)
+    returned_c = thermo.wobf(input_t)
+    npt.assert_almost_equal(returned_c, correct_c)
+
 
 
 
