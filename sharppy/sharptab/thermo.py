@@ -4,7 +4,30 @@ import numpy as np
 import numpy.ma as ma
 from sharppy.sharptab.constants import *
 
-__all__ = ['theta', 'wobf', 'ftoc', 'ctof', 'ctok', 'ktoc', 'ftok', 'ktof']
+__all__ = ['lcltemp', 'theta', 'wobf']
+__all__ += ['ftoc', 'ctof', 'ctok', 'ktoc', 'ftok', 'ktof']
+
+
+def lcltemp(t, td):
+    '''
+    Returns the temperature (C) of a parcel when raised to its LCL.
+
+    Parameters
+    ----------
+    t : float, numpy array
+        Temperature of the parcel (C)
+    td : float, numpy array
+        Dewpoint temperature of the parcel (C)
+
+    Returns
+    -------
+    Temperature (C) of the parcel at it's LCL.
+
+    '''
+    s = t - td
+    dlt = s * (1.2185 + 0.001278 * t + s * (-0.00219 + 1.173e-5 * s -
+        0.0000052 * t))
+    return t - dlt
 
 
 def theta(p, t, p2=1000.):
