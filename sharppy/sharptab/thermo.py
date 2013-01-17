@@ -30,6 +30,27 @@ def lcltemp(t, td):
     return t - dlt
 
 
+def thalvl(theta, t):
+    '''
+    Returns the level (hPa) of a parcel.
+
+    Parameters
+    ----------
+    theta : number, numpy array
+        Potential temperature of the parcel (C)
+    t : number, numpy array
+        Temperature of the parcel (C)
+
+    Returns
+    -------
+    Pressure Level (hPa [float]) of the parcel
+    '''
+
+    t = t + ZEROCNK
+    theta = theta + ZEROCNK
+    return 1000. / ((theta / t)**(1./ROCP))
+
+
 def theta(p, t, p2=1000.):
     '''
     Returns the potential temperature (C) of a parcel.
