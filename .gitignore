@@ -26,6 +26,9 @@ pip-log.txt
 # Mr Developer
 .mr.developer.cfg
 
+# Sublime Text 2 Projects
+*.sublime-project
+*.sublime-workspace
 
 # General Files
 __git_version__.py
