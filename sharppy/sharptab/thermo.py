@@ -14,9 +14,9 @@ def lcltemp(t, td):
 
     Parameters
     ----------
-    t : float, numpy array
+    t : number, numpy array
         Temperature of the parcel (C)
-    td : float, numpy array
+    td : number, numpy array
         Dewpoint temperature of the parcel (C)
 
     Returns
@@ -36,11 +36,11 @@ def theta(p, t, p2=1000.):
 
     Parameters
     ----------
-    p : number, numpy_array
+    p : number, numpy array
         The pressure of the parcel (hPa)
-    t : number, numpy_array
+    t : number, numpy array
         Temperature of the parcel (C)
-    p2 : number, numpy_array (default 1000.)
+    p2 : number, numpy array (default 1000.)
         Reference pressure level (hPa)
 
     Returns
@@ -57,7 +57,7 @@ def wobf(t):
 
     Parameters
     ----------
-    t : float, numpy array
+    t : number, numpy array
         Temperature (C)
 
     Returns
@@ -96,12 +96,12 @@ def ctof(t):
 
     Parameters
     ----------
-    t : number, numpy_array
+    t : number, numpy array
         The temperature in Celsius
 
     Returns
     -------
-    Temperature in Fahrenheit (number or array_like)
+    Temperature in Fahrenheit (number or numpy array)
 
     '''
     return (1.8 * t) + 32.
@@ -113,12 +113,12 @@ def ftoc(t):
 
     Parameters
     ----------
-    t : number, numpy_array
+    t : number, numpy array
         The temperature in Fahrenheit
 
     Returns
     -------
-    Temperature in Celsius (number or array_like)
+    Temperature in Celsius (number or numpy array)
 
     '''
     return (t - 32.) * (5. / 9.)
@@ -130,12 +130,12 @@ def ktoc(t):
 
     Parameters
     ----------
-    t : number, numpy_array
+    t : number, numpy array
         The temperature in Kelvin
 
     Returns
     -------
-    Temperature in Celsius (number or array_like)
+    Temperature in Celsius (number or numpy array)
 
     '''
     return t - ZEROCNK
@@ -147,12 +147,12 @@ def ctok(t):
 
     Parameters
     ----------
-    t : number, numpy_array
+    t : number, numpy array
         The temperature in Celsius
 
     Returns
     -------
-    Temperature in Kelvin (number or array_like)
+    Temperature in Kelvin (number or numpy array)
 
     '''
     return t + ZEROCNK
@@ -164,12 +164,12 @@ def ktof(t):
 
     Parameters
     ----------
-    t : number, numpy_array
+    t : number, numpy array
         The temperature in Kelvin
 
     Returns
     -------
-    Temperature in Fahrenheit (number or array_like)
+    Temperature in Fahrenheit (number or numpy array)
 
     '''
     return ctof(ktoc(t))
@@ -181,12 +181,12 @@ def ftok(t):
 
     Parameters
     ----------
-    t : number, numpy_array
+    t : number, numpy array
         The temperature in Fahrenheit
 
     Returns
     -------
-    Temperature in Kelvin (number or array_like)
+    Temperature in Kelvin (number or numpy array)
 
     '''
     return ctok(ftoc(t))
