@@ -250,6 +250,19 @@ def test_lcltemp():
     npt.assert_almost_equal(returned_t, correct_t)
 
 
+def test_thalvl():
+    input_theta = 10
+    input_t = 5
+    correct_p = 939.5475008003834
+    returned_p = thermo.thalvl(input_theta, input_t)
+    npt.assert_almost_equal(returned_p, correct_p)
+
+    input_theta = np.asanyarray([5, 12, 25])
+    input_t = np.asanyarray([5, 10, 0.])
+    correct_p = [1000., 975.6659847653189, 736.0076986893786]
+    correct_p = np.asanyarray(correct_p)
+    returned_p = thermo.thalvl(input_theta, input_t)
+    npt.assert_almost_equal(returned_p, correct_p)
 
 
 
