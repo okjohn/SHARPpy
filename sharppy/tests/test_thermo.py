@@ -265,5 +265,38 @@ def test_thalvl():
     npt.assert_almost_equal(returned_p, correct_p)
 
 
+def test_drylift():
+    input_p = 950
+    input_t = 30
+    input_td = 25
+    correct_p = 883.4367363248148
+    correct_t = 23.77298375
+    returned_p, returned_t = thermo.drylift(input_p, input_t, input_td)
+    npt.assert_almost_equal(returned_p, correct_p)
+    npt.assert_almost_equal(returned_t, correct_t)
+
+    input_p = np.asarray([950, 975, 1013, 900])
+    input_t = np.asarray([30, 10, 22, 40])
+    input_td = np.asarray([25, -10, 18, 0])
+    correct_p = np.asarray([883.4367363248148, 716.8293994988512,
+                            954.7701032005202, 504.72627541064145])
+    correct_t = np.asarray([23.77298375, -13.822639999999996,
+                            17.04965568, -7.6987199999999945])
+    returned_p, returned_t = thermo.drylift(input_p, input_t, input_td)
+    npt.assert_almost_equal(returned_p, correct_p)
+    npt.assert_almost_equal(returned_t, correct_t)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
