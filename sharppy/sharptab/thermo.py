@@ -4,7 +4,7 @@ import numpy as np
 import numpy.ma as ma
 from sharppy.sharptab.constants import *
 
-__all__ = ['lcltemp', 'theta', 'wobf']
+__all__ = ['thalvl', 'lcltemp', 'theta', 'wobf']
 __all__ += ['ftoc', 'ctof', 'ctok', 'ktoc', 'ftok', 'ktof']
 
 
