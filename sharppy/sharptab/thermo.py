@@ -4,8 +4,34 @@ import numpy as np
 import numpy.ma as ma
 from sharppy.sharptab.constants import *
 
-__all__ = ['thalvl', 'lcltemp', 'theta', 'wobf']
+__all__ = ['drylift', 'thalvl', 'lcltemp', 'theta', 'wobf']
 __all__ += ['ftoc', 'ctof', 'ctok', 'ktoc', 'ftok', 'ktof']
+
+
+def drylift(p, t, td):
+    '''
+    Lifts a parcel to the LCL and returns its new level and temperature.
+
+    Parameters
+    ----------
+    p : number, numpy array
+        Pressure of initial parcel in hPa
+    t : number, numpy array
+        Temperature of inital parcel in C
+    td : number, numpy array
+        Dew Point of initial parcel in C
+
+    Returns
+    -------
+    p2 : number, numpy array
+        LCL pressure in hPa
+    t2 : number, numpy array
+        LCL Temperature in C
+
+    '''
+    t2 = lcltemp(t, td)
+    p2 = thalvl(theta(p, t, 1000.), t2)
+    return p2, t2
 
 
 def lcltemp(t, td):
@@ -69,6 +95,8 @@ def theta(p, t, p2=1000.):
     Potential temperature (C)
 
     '''
+    p = np.ma.asanyarray(p)
+    p2 = p2 * np.ones(p.shape, dtype=np.float64)
     return ((t + ZEROCNK) * (p2 / p)**ROCP) - ZEROCNK
 
 
