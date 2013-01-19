@@ -304,6 +304,16 @@ def test_wetlift():
     npt.assert_almost_equal(returned_t, correct_t)
 
 
+def test_lifted():
+    input_p = 950
+    input_t = 30
+    input_td = 25
+    input_lev = 100
+    correct_t = -79.05621246586672
+    returned_t = thermo.lifted(input_p, input_t, input_td, input_lev)
+    npt.assert_almost_equal(returned_t, correct_t)
+
+
 
 
 
