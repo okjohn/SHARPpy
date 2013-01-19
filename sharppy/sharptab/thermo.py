@@ -176,6 +176,29 @@ def satlift(p, thetam):
     return t2 - eor
 
 
+def wetlift(p, t, p2):
+    '''
+    Lifts a parcel moist adiabatically to its new level.
+
+    Parameters
+    -----------
+    p : number
+        Pressure of initial parcel (hPa)
+    t : number
+        Temperature of initial parcel (C)
+    p2 : number
+        Pressure of final level (hPa)
+
+    Returns
+    -------
+    Temperature (C)
+
+    '''
+    thta = theta(p, t, 1000.)
+    thetam = thta - wobf(thta) + wobf(t)
+    return satlift(p2, thetam)
+
+
 def ctof(t):
     '''
     Convert temperature from Celsius to Fahrenheit
