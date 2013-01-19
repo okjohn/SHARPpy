@@ -5,6 +5,7 @@ import numpy.ma as ma
 from sharppy.sharptab.constants import *
 
 __all__ = ['drylift', 'thalvl', 'lcltemp', 'theta', 'wobf']
+__all__ = ['satlift']
 __all__ += ['ftoc', 'ctof', 'ctok', 'ktoc', 'ftok', 'ktof']
 
 
@@ -137,6 +138,42 @@ def wobf(t):
             return npol
         else:
             return ppol
+
+
+def satlift(p, thetam):
+    '''
+    Returns the temperature (C) of a saturated parcel (thm) when lifted to a
+    new pressure level (hPa)
+
+    Parameters
+    ----------
+    p : number
+        Pressure to which parcel is raised (hPa)
+    thetam : number
+        Saturated Potential Temperature of parcel (C)
+
+    Returns
+    -------
+    Temperature (C) of saturated parcel at new level
+
+    '''
+    if np.fabs(p - 1000.) - 0.001 <= 0: return thetam
+    eor = 999
+    while np.fabs(eor) - 0.1 > 0:
+        if eor == 999:                  # First Pass
+            pwrp = (p / 1000.)**ROCP
+            t1 = (thetam + ZEROCNK) * pwrp - ZEROCNK
+            e1 = wobf(t1) - wobf(thetam)
+            rate = 1
+        else:                           # Successive Passes
+            rate = (t2 - t1) / (e2 - e1)
+            t1 = t2
+            e1 = e2
+        t2 = t1 - (e1 * rate)
+        e2 = (t2 + ZEROCNK) / pwrp - ZEROCNK
+        e2 += wobf(t2) - wobf(e2) - thetam
+        eor = e2 * rate
+    return t2 - eor
 
 
 def ctof(t):
