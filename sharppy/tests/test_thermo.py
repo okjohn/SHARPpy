@@ -287,6 +287,13 @@ def test_drylift():
     npt.assert_almost_equal(returned_t, correct_t)
 
 
+def test_satlift():
+    input_p = 850
+    input_thetam = 20
+    correct_t = 13.712979340608157
+    returned_t = thermo.satlift(input_p, input_thetam)
+    npt.assert_almost_equal(returned_t, correct_t)
+
 
 
 
