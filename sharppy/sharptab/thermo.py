@@ -199,6 +199,31 @@ def wetlift(p, t, p2):
     return satlift(p2, thetam)
 
 
+def lifted(p, t, td, lev):
+    '''
+    Calculate temperature (C) of parcel (defined by p, t, td) lifted
+    to the specified pressure level.
+
+    Parameters
+    ----------
+    p : number
+        Pressure of initial parcel in hPa
+    t : number
+        Temperature of initial parcel in C
+    td : number
+        Dew Point of initial parcel in C
+    lev : number
+        Pressure to which parcel is lifted in hPa
+
+    Returns
+    -------
+    Temperature (C) of lifted parcel
+
+    '''
+    p2, t2 = drylift(p, t, td)
+    return wetlift(p2, t2, lev)
+
+
 def ctof(t):
     '''
     Convert temperature from Celsius to Fahrenheit
