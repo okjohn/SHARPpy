@@ -115,7 +115,7 @@ def wobf(t):
     Correction to theta (C) for calculation of saturated potential temperature.
 
     '''
-    t -= 20
+    t = t - 20
 
     npol = 1 + t * (-8.841660499999999e-3 + t * ( 1.4714143e-4
            + t * (-9.671989000000001e-7 + t * (-3.2607217e-8
@@ -129,15 +129,15 @@ def wobf(t):
     ppol = (29.93 / (ppol**4)) + (0.96 * t) - 14.8
 
     try:
-        correction = np.zeros(t.shape, dtype=np.float64)
-        correction[t <= 0] = npol[t <= 0]
-        correction[t > 0] = ppol[t > 0]
-        return correction
-    except AttributeError:
         if t <= 0:
             return npol
         else:
             return ppol
+    except:
+        correction = np.zeros(t.shape, dtype=np.float64)
+        correction[t <= 0] = npol[t <= 0]
+        correction[t > 0] = ppol[t > 0]
+        return correction
 
 
 def satlift(p, thetam):
