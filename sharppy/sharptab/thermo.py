@@ -5,7 +5,7 @@ import numpy.ma as ma
 from sharppy.sharptab.constants import *
 
 __all__ = ['drylift', 'thalvl', 'lcltemp', 'theta', 'wobf']
-__all__ = ['satlift']
+__all__ = ['satlift', 'wetlift', 'lifted']
 __all__ += ['ftoc', 'ctof', 'ctok', 'ktoc', 'ftok', 'ktof']
 
 
