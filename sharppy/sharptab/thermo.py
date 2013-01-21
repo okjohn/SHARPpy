@@ -5,7 +5,7 @@ import numpy.ma as ma
 from sharppy.sharptab.constants import *
 
 __all__ = ['drylift', 'thalvl', 'lcltemp', 'theta', 'wobf']
-__all__ = ['satlift', 'wetlift', 'lifted']
+__all__ = ['satlift', 'wetlift', 'lifted', 'vappres', 'mixratio']
 __all__ += ['ftoc', 'ctof', 'ctok', 'ktoc', 'ftok', 'ktof']
 
 
@@ -244,6 +244,28 @@ def vappres(t):
     pol = t * (7.8736169e-05 + (t * (-6.111796e-07 + pol)))
     pol = 0.99999683 + (t * (-9.082695e-03 + pol))
     return 6.1078 / pol**8
+
+
+def mixratio(p, t):
+    '''
+    Returns the mixing ratio (g/kg) of a parcel
+
+    Parameters
+    ----------
+    p : number, numpy array
+        Pressure of the parcel (hPa)
+    t : number, numpy array
+        Temperature of the parcel (hPa)
+
+    Returns
+    -------
+    Mixing Ratio (g/kg) of the given parcel
+
+    '''
+    x = 0.02 * (t - 12.5 + (7500. / p))
+    wfw = 1. + (0.0000045 * p) + (0.0014 * x * x)
+    fwesw = wfw * vappres(t)
+    return 621.97 * (fwesw / (p - fwesw))
 
 
 def ctof(t):
