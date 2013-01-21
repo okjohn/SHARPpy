@@ -328,6 +328,21 @@ def test_vappres():
     npt.assert_almost_equal(returned_p, correct_p)
 
 
+def test_mixratio():
+    input_p = 950
+    input_t = 25
+    correct_w = 21.549675456205275
+    returned_w = thermo.mixratio(input_p, input_t)
+    npt.assert_almost_equal(returned_w, correct_w)
+
+    input_p = np.asanyarray([1013, 1000, 975, 950, 900])
+    input_t = np.asanyarray([26, 15, 20, 10, 10])
+    correct_w = [21.448870702611913, 10.834359059077558, 15.346544211592512,
+                 8.17527964576288, 8.633830400361578]
+    correct_w = np.asanyarray(correct_w)
+    returned_w = thermo.mixratio(input_p, input_t)
+    npt.assert_almost_equal(returned_w, correct_w)
+
 
 
 
