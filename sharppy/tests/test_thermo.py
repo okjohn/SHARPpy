@@ -314,6 +314,19 @@ def test_lifted():
     npt.assert_almost_equal(returned_t, correct_t)
 
 
+def test_vappres():
+    input_t = 25
+    correct_p = 31.670078513287617
+    returned_p = thermo.vappres(input_t)
+    npt.assert_almost_equal(returned_p, correct_p)
+
+    input_t = np.asanyarray([0, 5, 10, 15, 20, 25])
+    correct_p = [6.107954896017587, 8.719365306196854, 12.2722963940349,
+                 17.04353238898728, 23.37237439430437, 31.670078513287617]
+    correct_p = np.asanyarray(correct_p)
+    returned_p = thermo.vappres(input_t)
+    npt.assert_almost_equal(returned_p, correct_p)
+
 
 
 
