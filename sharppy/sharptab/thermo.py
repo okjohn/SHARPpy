@@ -224,6 +224,28 @@ def lifted(p, t, td, lev):
     return wetlift(p2, t2, lev)
 
 
+def vappres(t):
+    '''
+    Returns the vapor pressure of dry air at given temperature
+
+    Parameters
+    ------
+    t : number, numpy array
+        Temperature of the parcel (C)
+
+    Returns
+    -------
+    Vapor Pressure of dry air
+
+    '''
+    pol = t * (1.1112018e-17 + (t * -3.0994571e-20))
+    pol = t * (2.1874425e-13 + (t * (-1.789232e-15 + pol)))
+    pol = t * (4.3884180e-09 + (t * (-2.988388e-11 + pol)))
+    pol = t * (7.8736169e-05 + (t * (-6.111796e-07 + pol)))
+    pol = 0.99999683 + (t * (-9.082695e-03 + pol))
+    return 6.1078 / pol**8
+
+
 def ctof(t):
     '''
     Convert temperature from Celsius to Fahrenheit
