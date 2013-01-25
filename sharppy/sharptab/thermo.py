@@ -5,8 +5,14 @@ import numpy.ma as ma
 from sharppy.sharptab.constants import *
 
 __all__ = ['drylift', 'thalvl', 'lcltemp', 'theta', 'wobf']
-__all__ = ['satlift', 'wetlift', 'lifted', 'vappres', 'mixratio']
+__all__ += ['satlift', 'wetlift', 'lifted', 'vappres', 'mixratio']
+__all__ += ['temp_at_mixrat']
 __all__ += ['ftoc', 'ctof', 'ctok', 'ktoc', 'ftok', 'ktof']
+
+
+# Constants Used
+c1 = 0.0498646455 ; c2 = 2.4082965 ; c3 = 7.07475
+c4 = 38.9114 ; c5 = 0.0915 ; c6 = 1.2035
 
 
 def drylift(p, t, td):
@@ -266,6 +272,27 @@ def mixratio(p, t):
     wfw = 1. + (0.0000045 * p) + (0.0014 * x * x)
     fwesw = wfw * vappres(t)
     return 621.97 * (fwesw / (p - fwesw))
+
+
+def temp_at_mixrat(w, p):
+    '''
+    Returns the temperature (C) of air at the given mixing ratio (g/kg) and
+    pressure (hPa)
+
+    Parameters
+    ----------
+    w : number, numpy array
+        Mixing Ratio (g/kg)
+    p : number, numpy array
+        Pressure (hPa)
+
+    Returns
+    -------
+    Temperature (C) of air at given mixing ratio and pressure
+    '''
+    x = np.log10(w * p / (622. + w))
+    x = (10.**((c1 * x) + c2) - c3 + (c4 * (10**(c5 * x) - c6)**2)) - ZEROCNK
+    return x
 
 
 def ctof(t):
