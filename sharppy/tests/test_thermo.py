@@ -344,6 +344,20 @@ def test_mixratio():
     npt.assert_almost_equal(returned_w, correct_w)
 
 
+def test_temp_at_mixrat():
+    input_w = 14
+    input_p = 950
+    correct_t = 18.25602418045935
+    returned_t = thermo.temp_at_mixrat(input_w, input_p)
+    npt.assert_almost_equal(returned_t, correct_t)
+
+    input_w = np.asanyarray([14, 12, 10, 8])
+    input_p = np.asanyarray([1013, 925, 850, 700])
+    correct_t = [19.28487241829498, 15.451394956732088,
+                 11.399344140651465, 5.290414578916341]
+    correct_t = np.asanyarray(correct_t)
+    returned_t = thermo.temp_at_mixrat(input_w, input_p)
+    npt.assert_almost_equal(returned_t, correct_t)
 
 
 
