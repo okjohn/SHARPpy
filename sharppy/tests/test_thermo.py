@@ -360,7 +360,20 @@ def test_temp_at_mixrat():
     npt.assert_almost_equal(returned_t, correct_t)
 
 
+def test_wetbulb():
+    input_p = 950
+    input_t = 5
+    input_td = -10
+    correct_t = -0.04811002960985089
+    returned_t = thermo.wetbulb(input_p, input_t, input_td)
+    npt.assert_almost_equal(returned_t, correct_t)
 
+    input_p = 1013
+    input_t = 5
+    input_td = -10
+    correct_t = 0.22705033380623352
+    returned_t = thermo.wetbulb(input_p, input_t, input_td)
+    npt.assert_almost_equal(returned_t, correct_t)
 
 
 
