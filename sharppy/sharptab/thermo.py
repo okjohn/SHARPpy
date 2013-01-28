@@ -6,7 +6,7 @@ from sharppy.sharptab.constants import *
 
 __all__ = ['drylift', 'thalvl', 'lcltemp', 'theta', 'wobf']
 __all__ += ['satlift', 'wetlift', 'lifted', 'vappres', 'mixratio']
-__all__ += ['temp_at_mixrat']
+__all__ += ['temp_at_mixrat', 'wetbulb']
 __all__ += ['ftoc', 'ctof', 'ctok', 'ktoc', 'ftok', 'ktof']
 
 
@@ -293,6 +293,27 @@ def temp_at_mixrat(w, p):
     x = np.log10(w * p / (622. + w))
     x = (10.**((c1 * x) + c2) - c3 + (c4 * (10**(c5 * x) - c6)**2)) - ZEROCNK
     return x
+
+
+def wetbulb(p, t, td):
+    '''
+    Calculates the wetbulb temperature (C) for the given parcel
+
+    Parameters
+    ----------
+    p : number
+        Pressure of parcel (hPa)
+    t : number
+        Temperature of parcel (C)
+    td : number
+        Dew Point of parcel (C)
+
+    Returns
+    -------
+    Wetbulb temperature (C)
+    '''
+    p2, t2 = drylift(p, t, td)
+    return wetlift(p2, t2, p)
 
 
 def ctof(t):
