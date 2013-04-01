@@ -6,7 +6,8 @@ from sharppy.sharptab.constants import *
 
 __all__ = ['drylift', 'thalvl', 'lcltemp', 'theta', 'wobf']
 __all__ += ['satlift', 'wetlift', 'lifted', 'vappres', 'mixratio']
-__all__ += ['temp_at_mixrat', 'wetbulb']
+__all__ += ['temp_at_mixrat', 'wetbulb', 'thetaw', 'thetae']
+__all__ += ['virtemp', 'relh']
 __all__ += ['ftoc', 'ctof', 'ctok', 'ktoc', 'ftok', 'ktof']
 
 
@@ -172,6 +173,27 @@ def virtemp(p, t, td):
     tk = t + ZEROCNK
     w = 0.001 * mixratio(p, td)
     return (tk * (1. + w / eps) / (1. + w)) - ZEROCNK
+
+
+def relh(p, t, td):
+    '''
+    Returns the virtual temperature (C) of a parcel.
+
+    Parameters
+    ----------
+    p : number
+        The pressure of the parcel (hPa)
+    t : number
+        Temperature of the parcel (C)
+    td : number
+        Dew point of parcel (C)
+
+    Returns
+    -------
+    Relative humidity (%) of a parcel
+
+    '''
+    return 100. * mixratio(p, td) / mixratio(p, t)
 
 
 def wobf(t):
