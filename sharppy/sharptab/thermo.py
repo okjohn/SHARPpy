@@ -129,6 +129,28 @@ def thetaw(p, t, td):
     return wetlift(p2, t2, 1000.)
 
 
+def thetae(p, t, td):
+    '''
+    Returns the equivalent potential temperature (C) of a parcel.
+
+    Parameters
+    ----------
+    p : number
+        The pressure of the parcel (hPa)
+    t : number
+        Temperature of the parcel (C)
+    td : number
+        Dew point of parcel (C)
+
+    Returns
+    -------
+    Equivalent potential temperature (C)
+
+    '''
+    p2, t2 = drylift(p, t, td)
+    return theta(100., wetlift(p2, t2, 100.), 1000.)
+
+
 def wobf(t):
     '''
     Implementation of the Wobus Function for computing the moist adiabats.
