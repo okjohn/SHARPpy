@@ -392,6 +392,21 @@ def test_thetaw():
     npt.assert_almost_equal(returned_t, correct_t)
 
 
+def test_thetae():
+    input_p = 925
+    input_t = 7
+    input_td = 3
+    correct_t = 28.864469418729357
+    returned_t = thermo.thetae(input_p, input_t, input_td)
+    npt.assert_almost_equal(returned_t, correct_t)
+
+    input_p = 950
+    input_t = 20
+    input_td = 14
+    correct_t = 57.68849564698746
+    returned_t = thermo.thetae(input_p, input_t, input_td)
+    npt.assert_almost_equal(returned_t, correct_t)
+
 
 
 
