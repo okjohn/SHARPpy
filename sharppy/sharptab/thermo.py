@@ -107,6 +107,28 @@ def theta(p, t, p2=1000.):
     return ((t + ZEROCNK) * (p2 / p)**ROCP) - ZEROCNK
 
 
+def thetaw(p, t, td):
+    '''
+    Returns the wetbulb potential temperature (C) of a parcel.
+
+    Parameters
+    ----------
+    p : number
+        The pressure of the parcel (hPa)
+    t : number
+        Temperature of the parcel (C)
+    td : number
+        Dew point of parcel (C)
+
+    Returns
+    -------
+    Wetbulb potential temperature (C)
+
+    '''
+    p2, t2 = drylift(p, t, td)
+    return wetlift(p2, t2, 1000.)
+
+
 def wobf(t):
     '''
     Implementation of the Wobus Function for computing the moist adiabats.
