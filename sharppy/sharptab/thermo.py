@@ -13,7 +13,7 @@ __all__ += ['ftoc', 'ctof', 'ctok', 'ktoc', 'ftok', 'ktof']
 # Constants Used
 c1 = 0.0498646455 ; c2 = 2.4082965 ; c3 = 7.07475
 c4 = 38.9114 ; c5 = 0.0915 ; c6 = 1.2035
-
+eps = 0.62197
 
 def drylift(p, t, td):
     '''
@@ -149,6 +149,29 @@ def thetae(p, t, td):
     '''
     p2, t2 = drylift(p, t, td)
     return theta(100., wetlift(p2, t2, 100.), 1000.)
+
+
+def virtemp(p, t, td):
+    '''
+    Returns the virtual temperature (C) of a parcel.
+
+    Parameters
+    ----------
+    p : number
+        The pressure of the parcel (hPa)
+    t : number
+        Temperature of the parcel (C)
+    td : number
+        Dew point of parcel (C)
+
+    Returns
+    -------
+    Virtual temperature (C)
+
+    '''
+    tk = t + ZEROCNK
+    w = 0.001 * mixratio(p, td)
+    return (tk * (1. + w / eps) / (1. + w)) - ZEROCNK
 
 
 def wobf(t):
