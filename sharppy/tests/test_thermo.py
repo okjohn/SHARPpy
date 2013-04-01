@@ -424,6 +424,22 @@ def test_virtemp():
     npt.assert_almost_equal(returned_t, correct_t)
 
 
+def test_relh():
+    input_p = 925
+    input_t = 7
+    input_td = 3
+    correct_t = 75.45115959367405
+    returned_t = thermo.relh(input_p, input_t, input_td)
+    npt.assert_almost_equal(returned_t, correct_t)
+
+    input_p = 950
+    input_t = 20
+    input_td = 14
+    correct_t = 67.8069681577635
+    returned_t = thermo.relh(input_p, input_t, input_td)
+    npt.assert_almost_equal(returned_t, correct_t)
+
+
 
 
 
