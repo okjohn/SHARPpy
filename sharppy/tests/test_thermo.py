@@ -376,6 +376,23 @@ def test_wetbulb():
     npt.assert_almost_equal(returned_t, correct_t)
 
 
+def test_thetaw():
+    input_p = 925
+    input_t = 7
+    input_td = 3
+    correct_t = 8.69793773351298
+    returned_t = thermo.thetaw(input_p, input_t, input_td)
+    npt.assert_almost_equal(returned_t, correct_t)
+
+    input_p = 950
+    input_t = 20
+    input_td = 14
+    correct_t = 18.21065472362592
+    returned_t = thermo.thetaw(input_p, input_t, input_td)
+    npt.assert_almost_equal(returned_t, correct_t)
+
+
+
 
 
 
