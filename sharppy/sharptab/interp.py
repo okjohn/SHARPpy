@@ -3,8 +3,7 @@ from __future__ import division
 import numpy as np
 import numpy.ma as ma
 import numpy.testing as npt
-from sharppy.sharptab import utils
-import sharppy.sharptab.thermo as thermo
+from sharppy.sharptab import utils, thermo
 from sharppy.sharptab.constants import *
 
 
