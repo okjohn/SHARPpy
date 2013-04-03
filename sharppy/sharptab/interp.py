@@ -53,12 +53,12 @@ def hght(p, prof):
 
 def temp(p, prof):
     '''
-    Interpolates the given data to calculate a height at a given pressure
+    Interpolates the given data to calculate a temperature at a given pressure
 
     Parameters
     ----------
     p : number, numpy
-        Pressure (hPa) of the level for which height is desired
+        Pressure (hPa) of the level for which temperature is desired
     prof : profile object
         Profile object
 
@@ -76,12 +76,13 @@ def temp(p, prof):
 
 def dwpt(p, prof):
     '''
-    Interpolates the given data to calculate a height at a given pressure
+    Interpolates the given data to calculate a dew point temperature
+    at a given pressure
 
     Parameters
     ----------
     p : number, numpy
-        Pressure (hPa) of the level for which height is desired
+        Pressure (hPa) of the level for which dew point temperature is desired
     prof : profile object
         Profile object
 
@@ -95,6 +96,8 @@ def dwpt(p, prof):
     # vertical, we must reverse the order of the two arrays to satisfy
     # this requirement.
     return np.interp(np.log10(p), prof.logp[::-1], prof.dwpc[::-1])
+
+
 
 
 
