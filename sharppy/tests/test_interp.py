@@ -83,8 +83,9 @@ def test_vtmp():
 def test_components():
     input_p = 900
     correct_u, correct_v = -21.1106953677, 1.63907594278
-    returned_u, returned_v = interp.components(input_p, prof)
-    npt.assert_almost_equal(returned_v, correct_v)
+    correct = [correct_u, correct_v]
+    returned = interp.components(input_p, prof)
+    npt.assert_almost_equal(returned, correct)
 
     input_p = [900, 800, 600, 400]
     correct_u = np.asarray([-21.1106953677, 4.53891277421,
@@ -92,6 +93,23 @@ def test_components():
     correct_v = np.asarray([1.63907594278, 24.3933682556,
                             12.1341348539, 5.61574926111])
     correct = [correct_u, correct_v]
-    returned_v = interp.components(input_p, prof)
-    npt.assert_almost_equal(returned_v, correct)
+    returned = interp.components(input_p, prof)
+    npt.assert_almost_equal(returned, correct)
+
+
+def test_vec():
+    input_p = 900
+    correct_wdir, correct_wspd = 94.43965025418073, 21.174230301336348
+    correct = [correct_wdir, correct_wspd]
+    returned = interp.vec(input_p, prof)
+    npt.assert_almost_equal(returned, correct)
+
+    input_p = [900, 800, 600, 400]
+    correct_wdir = np.asarray([94.43965025418073, 190.54057243918774,
+                               241.43664290047258, 260.8912611327822])
+    correct_wspd = np.asarray([21.174230301336348, 24.812056424754488,
+                               25.378303745260787, 35.473416212590074])
+    correct = [correct_wdir, correct_wspd]
+    returned = interp.vec(input_p, prof)
+    npt.assert_almost_equal(returned, correct)
 

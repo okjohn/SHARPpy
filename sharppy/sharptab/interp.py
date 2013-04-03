@@ -6,7 +6,7 @@ import sharppy.sharptab.thermo as thermo
 from sharppy.sharptab.constants import *
 
 
-__all__ = ['pres', 'hght', 'temp', 'dwpt', 'vtmp']
+__all__ = ['pres', 'hght', 'temp', 'dwpt', 'vtmp', 'components', 'vec']
 
 
 def pres(h, prof):
@@ -150,6 +150,25 @@ def components(p, prof):
     V = np.interp(np.log10(p), prof.logp[::-1], prof.v[::-1])
     return U, V
 
+
+def vec(p, prof):
+    '''
+    Interpolates the given data to calculate the wind direction and speed
+    at a given pressure
+
+    Parameters
+    ----------
+    p : number, numpy array
+        Pressure (hPa) of a level
+    prof : profile object
+        Profile object
+
+    Returns
+    -------
+    Wind direction and magnitude at the given pressure
+    '''
+    U, V = components(p, prof)
+    return utils.comp2vec(U, V)
 
 
 
