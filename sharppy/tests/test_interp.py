@@ -38,3 +38,18 @@ def test_hght():
                             4292.73519676, 7314.42659961])
     returned_z = interp.hght(input_p, prof)
     npt.assert_almost_equal(returned_z, correct_z)
+
+
+def test_temp():
+    input_p = 900
+    correct_t = 3.7922252167
+    returned_t = interp.temp(input_p, prof)
+    npt.assert_almost_equal(returned_t, correct_t)
+
+    input_p = [900, 800, 600, 400]
+    correct_t = np.asarray([3.7922252167, 6.82692323938,
+                            -6.23415788333, -27.8185835915])
+    returned_t = interp.temp(input_p, prof)
+    npt.assert_almost_equal(returned_t, correct_t)
+
+
