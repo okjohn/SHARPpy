@@ -126,4 +126,16 @@ def test_agl():
     npt.assert_almost_equal(returned_agl, correct_agl)
 
 
+def test_msl():
+    input_z = 1000.
+    correct_agl = 1798.
+    returned_agl = interp.msl(input_z, prof)
+    npt.assert_almost_equal(returned_agl, correct_agl)
+
+    input_z = [1000., 3000., 6000.]
+    correct_agl = [1798., 3798., 6798]
+    returned_agl = interp.msl(input_z, prof)
+    npt.assert_almost_equal(returned_agl, correct_agl)
+
+
 
