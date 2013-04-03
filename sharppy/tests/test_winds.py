@@ -18,3 +18,10 @@ def test_mean_wind():
     correct = 20.103278626040353, 14.726131326109194
     returned = winds.mean_wind(prof)
     npt.assert_almost_equal(returned, correct)
+
+
+def test_mean_wind():
+    correct = 24.169006187866806, 12.599406561454707
+    returned = winds.mean_wind_npw(prof)
+    print returned
+    npt.assert_almost_equal(returned, correct)
