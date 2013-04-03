@@ -53,3 +53,16 @@ def test_temp():
     npt.assert_almost_equal(returned_t, correct_t)
 
 
+def test_dwpt():
+    input_p = 900
+    correct_t = 3.65703084712
+    returned_t = interp.dwpt(input_p, prof)
+    npt.assert_almost_equal(returned_t, correct_t)
+
+    input_p = [900, 800, 600, 400]
+    correct_t = np.asarray([3.65703084712, 5.95263180125,
+                            -10.5001991246, -34.2554127969])
+    returned_t = interp.dwpt(input_p, prof)
+    npt.assert_almost_equal(returned_t, correct_t)
+
+
