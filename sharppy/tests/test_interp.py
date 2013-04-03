@@ -113,3 +113,17 @@ def test_vec():
     returned = interp.vec(input_p, prof)
     npt.assert_almost_equal(returned, correct)
 
+
+def test_agl():
+    input_z = 1000.
+    correct_agl = 202.
+    returned_agl = interp.agl(input_z, prof)
+    npt.assert_almost_equal(returned_agl, correct_agl)
+
+    input_z = [1000., 3000., 6000.]
+    correct_agl = [202., 2202., 5202]
+    returned_agl = interp.agl(input_z, prof)
+    npt.assert_almost_equal(returned_agl, correct_agl)
+
+
+

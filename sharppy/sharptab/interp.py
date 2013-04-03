@@ -7,6 +7,7 @@ from sharppy.sharptab.constants import *
 
 
 __all__ = ['pres', 'hght', 'temp', 'dwpt', 'vtmp', 'components', 'vec']
+__all__ += ['agl']
 
 
 def pres(h, prof):
@@ -169,6 +170,27 @@ def vec(p, prof):
     '''
     U, V = components(p, prof)
     return utils.comp2vec(U, V)
+
+
+def agl(h, prof):
+    '''
+    Convert a height from mean sea-level (MSL) to above ground-level (AGL)
+
+    Parameters
+    ----------
+    h : number, numpy array
+        Height of a level
+    prof : profile object
+        Profile object
+
+    Returns
+    -------
+    Converted height
+
+    '''
+    return h - prof.hght[prof.sfc]
+
+
 
 
 
