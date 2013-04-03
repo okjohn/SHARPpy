@@ -1,4 +1,5 @@
 ''' Frequently used functions '''
+from __future__ import division
 import numpy as np
 import numpy.ma as ma
 from sharppy.sharptab.constants import MISSING, TOL

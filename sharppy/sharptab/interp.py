@@ -1,4 +1,5 @@
 ''' Interpolation Routines '''
+from __future__ import division
 import numpy as np
 import numpy.ma as ma
 import numpy.testing as npt
