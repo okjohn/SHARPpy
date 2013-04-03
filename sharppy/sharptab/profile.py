@@ -61,6 +61,7 @@ class Profile(object):
         self.hght[self.hght == self.missing] = ma.masked
         self.tmpc[self.tmpc == self.missing] = ma.masked
         self.dwpc[self.dwpc == self.missing] = ma.masked
+        self.logp = np.log10(self.pres.copy())
         if 'wdir' in kwargs:
             self.wdir = ma.asanyarray(kwargs.get('wdir'))
             self.wspd = ma.asanyarray(kwargs.get('wspd'))
