@@ -34,7 +34,7 @@ def hght(p, prof):
 
     Parameters
     ----------
-    p : number, numpy
+    p : number, numpy array
         Pressure (hPa) of the level for which height is desired
     prof : profile object
         Profile object
@@ -57,7 +57,7 @@ def temp(p, prof):
 
     Parameters
     ----------
-    p : number, numpy
+    p : number, numpy array
         Pressure (hPa) of the level for which temperature is desired
     prof : profile object
         Profile object
@@ -81,7 +81,7 @@ def dwpt(p, prof):
 
     Parameters
     ----------
-    p : number, numpy
+    p : number, numpy array
         Pressure (hPa) of the level for which dew point temperature is desired
     prof : profile object
         Profile object
@@ -105,7 +105,7 @@ def vtmp(p, prof):
 
     Parameters
     ----------
-    p : number, numpy
+    p : number, numpy array
         Pressure (hPa) of the level for which virtual temperature is desired
     prof : profile object
         Profile object
@@ -124,6 +124,33 @@ def vtmp(p, prof):
         return np.asanyarray(vt)
     except TypeError:
         return thermo.virtemp(p, t, td)
+
+
+def components(p, prof):
+    '''
+    Interpolates the given data to calculate the U and V components at a
+    given pressure
+
+    Parameters
+    ----------
+    p : number, numpy array
+        Pressure (hPa) of a level
+    prof : profile object
+        Profile object
+
+    Returns
+    -------
+    U and V components at the given pressure
+    '''
+    # Note: numpy's interpoloation routine expects the interpoloation
+    # routine to be in ascending order. Because pressure decreases in the
+    # vertical, we must reverse the order of the two arrays to satisfy
+    # this requirement.
+    U = np.interp(np.log10(p), prof.logp[::-1], prof.u[::-1])
+    V = np.interp(np.log10(p), prof.logp[::-1], prof.v[::-1])
+    return U, V
+
+
 
 
 

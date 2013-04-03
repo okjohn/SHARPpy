@@ -13,7 +13,8 @@ d = [-9999., 1., 9.2, -1.2, -21.5, -50.7, -62.5, -71.1, -71.7, -73.7]
 wd = [-9999., 70., 175., 230., 255., 265., 255., 260., 280., 295.]
 ws = [-9999., 31.99, 27.99, 25.99, 25.99, 48., 52.99, 75., 77., 39.01]
 prof = Profile(pres=p, hght=z, tmpc=t, dwpc=d, wdir=wd, wspd=ws)
-
+print prof.u
+print prof.v
 
 def test_pres():
     input_z = 1000.
@@ -78,4 +79,19 @@ def test_vtmp():
     returned_v = interp.vtmp(input_p, prof)
     npt.assert_almost_equal(returned_v, correct_v)
 
+
+def test_components():
+    input_p = 900
+    correct_u, correct_v = -21.1106953677, 1.63907594278
+    returned_u, returned_v = interp.components(input_p, prof)
+    npt.assert_almost_equal(returned_v, correct_v)
+
+    input_p = [900, 800, 600, 400]
+    correct_u = np.asarray([-21.1106953677, 4.53891277421,
+                            22.289483447, 35.026084823])
+    correct_v = np.asarray([1.63907594278, 24.3933682556,
+                            12.1341348539, 5.61574926111])
+    correct = [correct_u, correct_v]
+    returned_v = interp.components(input_p, prof)
+    npt.assert_almost_equal(returned_v, correct)
 
