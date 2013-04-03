@@ -98,7 +98,6 @@ def test_comp2vec_single():
     correct_wdir = 225
     correct_wspd = 7.0710678118654755
     returned_wdir, returned_wspd = utils.comp2vec(input_u, input_v)
-    print returned_wdir, returned_wspd
     npt.assert_almost_equal(returned_wdir, correct_wdir)
     npt.assert_almost_equal(returned_wspd, correct_wspd)
 
@@ -206,8 +205,6 @@ def test_mag_default_missing_single():
     input_v = 10
     correct_answer = ma.masked
     returned_answer = utils.mag(input_u, input_v)
-    print correct_answer, type(correct_answer)
-    print returned_answer, type(returned_answer)
     npt.assert_(type(returned_answer), type(correct_answer))
 
 def test_mag_default_missing_array():
@@ -226,8 +223,6 @@ def test_mag_user_missing_single():
     input_v = 10
     correct_answer = ma.masked
     returned_answer = utils.mag(input_u, input_v, missing)
-    print correct_answer, type(correct_answer)
-    print returned_answer, type(returned_answer)
     npt.assert_(type(returned_answer), type(correct_answer))
 
 def test_mag_user_missing_array():
