@@ -6,7 +6,7 @@ import sharppy.sharptab.thermo as thermo
 from sharppy.sharptab.constants import *
 
 
-__all__ = ['pres', 'hght', 'temp', 'dwpt']
+__all__ = ['pres', 'hght', 'temp', 'dwpt', 'vtmp']
 
 
 def pres(h, prof):
@@ -97,6 +97,33 @@ def dwpt(p, prof):
     # this requirement.
     return np.interp(np.log10(p), prof.logp[::-1], prof.dwpc[::-1])
 
+
+def vtmp(p, prof):
+    '''
+    Interpolates the given data to calculate a virtual temperature
+    at a given pressure
+
+    Parameters
+    ----------
+    p : number, numpy
+        Pressure (hPa) of the level for which virtual temperature is desired
+    prof : profile object
+        Profile object
+
+    Returns
+    -------
+    Virtual tmperature (C) at the given pressure
+
+    '''
+    t = temp(p, prof)
+    td = dwpt(p, prof)
+    try:
+        vt = []
+        for pp,tt,tdtd in zip(p, t, td):
+            vt.append(thermo.virtemp(pp, tt, tdtd))
+        return np.asanyarray(vt)
+    except TypeError:
+        return thermo.virtemp(p, t, td)
 
 
 

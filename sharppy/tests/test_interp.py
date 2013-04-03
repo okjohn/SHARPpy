@@ -66,3 +66,16 @@ def test_dwpt():
     npt.assert_almost_equal(returned_t, correct_t)
 
 
+def test_vtmp():
+    input_p = 900
+    correct_v = 4.722189142078207
+    returned_v = interp.vtmp(input_p, prof)
+    npt.assert_almost_equal(returned_v, correct_v)
+
+    input_p = [900, 800, 600, 400]
+    correct_v = np.asarray([4.722189142078207, 8.069359717080374,
+                            -5.769345740514382, -27.74007032980404])
+    returned_v = interp.vtmp(input_p, prof)
+    npt.assert_almost_equal(returned_v, correct_v)
+
+
