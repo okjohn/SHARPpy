@@ -20,3 +20,21 @@ def test_pres():
     correct_p = 902.639252576
     returned_p = interp.pres(input_z, prof)
     npt.assert_almost_equal(returned_p, correct_p)
+
+    input_z = [1000., 3000., 6000.]
+    correct_p = np.asarray([902.639252576, 707.38979834, 480.785620453])
+    returned_p = interp.pres(input_z, prof)
+    npt.assert_almost_equal(returned_p, correct_p)
+
+
+def test_hght():
+    input_p = 900
+    correct_z = 1024.17165016
+    returned_z = interp.hght(input_p, prof)
+    npt.assert_almost_equal(returned_z, correct_z)
+
+    input_p = [900, 800, 600, 400]
+    correct_z = np.asarray([1024.17165016, 1992.47263808,
+                            4292.73519676, 7314.42659961])
+    returned_z = interp.hght(input_p, prof)
+    npt.assert_almost_equal(returned_z, correct_z)
