@@ -6,7 +6,7 @@ import sharppy.sharptab.thermo as thermo
 from sharppy.sharptab.constants import *
 
 
-__all__ = ['pres', 'hght', 'temp']
+__all__ = ['pres', 'hght', 'temp', 'dwpt']
 
 
 def pres(h, prof):
@@ -72,6 +72,29 @@ def temp(p, prof):
     # vertical, we must reverse the order of the two arrays to satisfy
     # this requirement.
     return np.interp(np.log10(p), prof.logp[::-1], prof.tmpc[::-1])
+
+
+def dwpt(p, prof):
+    '''
+    Interpolates the given data to calculate a height at a given pressure
+
+    Parameters
+    ----------
+    p : number, numpy
+        Pressure (hPa) of the level for which height is desired
+    prof : profile object
+        Profile object
+
+    Returns
+    -------
+    Dew point tmperature (C) at the given pressure
+
+    '''
+    # Note: numpy's interpoloation routine expects the interpoloation
+    # routine to be in ascending order. Because pressure decreases in the
+    # vertical, we must reverse the order of the two arrays to satisfy
+    # this requirement.
+    return np.interp(np.log10(p), prof.logp[::-1], prof.dwpc[::-1])
 
 
 
