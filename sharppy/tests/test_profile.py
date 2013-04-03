@@ -167,7 +167,6 @@ class TestProfile(object):
         self.prof = Profile(pres=pres, hght=hght, tmpc=tmpc,
                             dwpc=dwpc, wdir=wdir, wspd=wspd)
 
-
     def test_prof_pres(self):
         pres[pres == MISSING] = ma.masked
         npt.assert_almost_equal(self.prof.pres, pres)
