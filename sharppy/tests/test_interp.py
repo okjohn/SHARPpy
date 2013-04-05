@@ -108,27 +108,27 @@ def test_vec():
     npt.assert_almost_equal(returned, correct)
 
 
-def test_agl():
+def test_to_agl():
     input_z = 1000.
     correct_agl = 643.0
-    returned_agl = interp.agl(prof, input_z)
+    returned_agl = interp.to_agl(prof, input_z)
     npt.assert_almost_equal(returned_agl, correct_agl)
 
     input_z = [1000., 3000., 6000.]
     correct_agl = [643., 2643., 5643.]
-    returned_agl = interp.agl(prof, input_z)
+    returned_agl = interp.to_agl(prof, input_z)
     npt.assert_almost_equal(returned_agl, correct_agl)
 
 
-def test_msl():
+def test_to_msl():
     input_z = 1000.
     correct_agl = 1357.
-    returned_agl = interp.msl(prof, input_z)
+    returned_agl = interp.to_msl(prof, input_z)
     npt.assert_almost_equal(returned_agl, correct_agl)
 
     input_z = [1000., 3000., 6000.]
     correct_agl = [1357., 3357., 6357]
-    returned_agl = interp.msl(prof, input_z)
+    returned_agl = interp.to_msl(prof, input_z)
     npt.assert_almost_equal(returned_agl, correct_agl)
 
 
