@@ -257,8 +257,9 @@ def helicity(prof, lower, upper, stu=0, stv=0, dp=-1, exact=False):
         ind2 = ma.where(pupper < prof.pres)[0].max()
         u1, v1 = interp.components(prof, plower)
         u2, v2 = interp.components(prof, pupper)
-        u = np.concatenate([[u1], prof.u[ind1:ind2+1].compressed(), [u2]])
-        v = np.concatenate([[v1], prof.v[ind1:ind2+1].compressed(), [v2]])
+        mask = ~prof.u[ind1:ind2+1].mask * ~prof.v[ind1:ind2+1].mask
+        u = np.concatenate([[u1], prof.u[ind1:ind2+1][mask], [u2]])
+        v = np.concatenate([[v1], prof.v[ind1:ind2+1][mask], [v2]])
     else:
         ps = np.arange(plower, pupper+dp, dp)
         u, v = interp.components(prof, ps)
