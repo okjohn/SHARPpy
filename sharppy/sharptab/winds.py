@@ -253,8 +253,8 @@ def helicity(prof, lower, upper, stu=0, stv=0, dp=-1, exact=True):
     plower = interp.pres(prof, lower)
     pupper = interp.pres(prof, upper)
     if exact:
-        ind1 = np.where(plower > prof.pres)[0].min()
-        ind2 = np.where(pupper < prof.pres)[0].max()
+        ind1 = ma.where(plower > prof.pres)[0].min()
+        ind2 = ma.where(pupper < prof.pres)[0].max()
         u1, v1 = interp.components(prof, plower)
         u2, v2 = interp.components(prof, pupper)
         u = np.concatenate([[u1], prof.u[ind1:ind2+1].compressed(), [u2]])
@@ -270,7 +270,7 @@ def helicity(prof, lower, upper, stu=0, stv=0, dp=-1, exact=True):
     return phel+nhel, phel, nhel
 
 
-def max_wind(prof, lower, upper, all=False):
+def max_wind(prof, lower, upper, _all=False):
     '''
     Finds the maximum wind speed of the layer given by lower and upper levels.
     In the event of the maximum wind speed occurring at multiple levels, the
@@ -284,6 +284,8 @@ def max_wind(prof, lower, upper, all=False):
         Bottom level of layer (m, AGL)
     upper : number
         Top level of layer (m, AGL)
+    _all : boolean (optional; defaul = False)
+        Flag to check if whether to return all points or just the first
 
     Returns
     -------
@@ -299,14 +301,14 @@ def max_wind(prof, lower, upper, all=False):
     upper = interp.to_msl(prof, upper)
     plower = interp.pres(prof, lower)
     pupper = interp.pres(prof, upper)
-    ind1 = np.where(plower > prof.pres)[0].min()
-    ind2 = np.where(pupper < prof.pres)[0].max()
-    inds = np.where(np.fabs(prof.wspd[ind1:ind2+1] -
+    ind1 = ma.where(plower > prof.pres)[0].min()
+    ind2 = ma.where(pupper < prof.pres)[0].max()
+    inds = ma.where(np.fabs(prof.wspd[ind1:ind2+1] -
                     prof.wspd[ind1:ind2+1].max()) < TOL)[0]
     inds += ind1
     inds.sort()
     maxu, maxv =  utils.vec2comp(prof.wdir[inds], prof.wspd[inds])
-    if all:
+    if _all:
         return maxu, maxv, prof.pres[inds]
     else:
         return maxu[0], maxv[0], prof.pres[inds[0]]

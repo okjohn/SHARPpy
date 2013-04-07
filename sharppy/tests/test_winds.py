@@ -11,7 +11,6 @@ import test_profile
 prof = test_profile.TestProfile().prof
 
 
-import time
 def test_mean_wind():
     returned = winds.mean_wind(prof)
     correct_u, correct_v = 27.347100616691097, 1.7088123127933754
@@ -86,7 +85,7 @@ def test_max_wind():
     correct_v = [-13.023613325019747, -13.023613325019747]
     correct_p = [175.0, 172.64]
     correct = [correct_u, correct_v, correct_p]
-    returned = winds.max_wind(prof, agl1, agl2, all=True)
+    returned = winds.max_wind(prof, agl1, agl2, _all=True)
     npt.assert_almost_equal(returned, correct)
 
 

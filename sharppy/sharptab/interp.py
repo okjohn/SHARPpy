@@ -50,7 +50,7 @@ def hght(prof, p):
     # routine to be in ascending order. Because pressure decreases in the
     # vertical, we must reverse the order of the two arrays to satisfy
     # this requirement.
-    return generic_interp_pres(np.log10(p), prof.logp[::-1], prof.hght[::-1])
+    return generic_interp_pres(np.log(p), prof.logp[::-1], prof.hght[::-1])
 
 
 def temp(prof, p):
@@ -73,7 +73,7 @@ def temp(prof, p):
     # routine to be in ascending order. Because pressure decreases in the
     # vertical, we must reverse the order of the two arrays to satisfy
     # this requirement.
-    return generic_interp_pres(np.log10(p), prof.logp[::-1], prof.tmpc[::-1])
+    return generic_interp_pres(np.log(p), prof.logp[::-1], prof.tmpc[::-1])
 
 
 def dwpt(prof, p):
@@ -97,7 +97,7 @@ def dwpt(prof, p):
     # routine to be in ascending order. Because pressure decreases in the
     # vertical, we must reverse the order of the two arrays to satisfy
     # this requirement.
-    return generic_interp_pres(np.log10(p), prof.logp[::-1], prof.dwpc[::-1])
+    return generic_interp_pres(np.log(p), prof.logp[::-1], prof.dwpc[::-1])
 
 
 def vtmp(prof, p):
@@ -146,8 +146,8 @@ def components(prof, p):
     # routine to be in ascending order. Because pressure decreases in the
     # vertical, we must reverse the order of the two arrays to satisfy
     # this requirement.
-    U = generic_interp_pres(np.log10(p), prof.logp[::-1], prof.u[::-1])
-    V = generic_interp_pres(np.log10(p), prof.logp[::-1], prof.v[::-1])
+    U = generic_interp_pres(np.log(p), prof.logp[::-1], prof.u[::-1])
+    V = generic_interp_pres(np.log(p), prof.logp[::-1], prof.v[::-1])
     return U, V
 
 
@@ -239,8 +239,8 @@ def generic_interp_hght(h, hght, field, log=False):
         not_masked2 = np.ones(field.shape)
     not_masked = not_masked1 * not_masked2
     if log:
-        return 10**np.interp(h, hght[not_masked], field[not_masked],
-                             left=ma.masked, right=ma.masked)
+        return np.exp(np.interp(h, hght[not_masked], field[not_masked],
+                                left=ma.masked, right=ma.masked))
     else:
         return np.interp(h, hght[not_masked], field[not_masked],
                          left=ma.masked, right=ma.masked)
