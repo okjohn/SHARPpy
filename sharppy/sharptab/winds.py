@@ -214,7 +214,7 @@ def non_parcel_bunkers_motion(prof):
     return rstu, rstv, lstu, lstv
 
 
-def helicity(prof, lower, upper, stu=0, stv=0, dp=-1, exact=True):
+def helicity(prof, lower, upper, stu=0, stv=0, dp=-1, exact=False):
     '''
     Calculates the relative helicity (m2/s2) of a layer from lower to upper.
     If storm-motion vector is supplied, storm-relative helicity, both
@@ -232,9 +232,9 @@ def helicity(prof, lower, upper, stu=0, stv=0, dp=-1, exact=True):
         U-component of storm-motion
     stv : number (optional; default = 0)
         V-component of storm-motion
-    dp : negative integer (optional; default -1)
+    dp : negative integer (optional; default = -1)
         The pressure increment for the interpolated sounding
-    exact : bool (optional; default = True)
+    exact : bool (optional; default = False)
         Switch to choose between using the exact data (slower) or using
         interpolated sounding at 'dp' pressure levels (faster)
 
