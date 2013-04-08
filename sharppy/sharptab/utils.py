@@ -5,7 +5,7 @@ import numpy.ma as ma
 from sharppy.sharptab.constants import MISSING, TOL
 
 __all__ = ['MS2KTS', 'KTS2MS', 'MS2MPH', 'MPH2MS', 'MPH2KTS', 'KTS2MPH']
-__all__ += ['M2FT', 'FT2M', 'vec2comp', 'comp2vec', 'mag']
+__all__ += ['M2FT', 'FT2M', 'vec2comp', 'comp2vec', 'mag', 'QC']
 
 
 def MS2KTS(val):
@@ -295,4 +295,11 @@ def mag(u, v, missing=MISSING):
     return ma.sqrt(u**2 + v**2)
 
 
+def QC(val):
+    '''
+    Tests if a value is masked.
+
+    '''
+    if type(val) == type(ma.masked): return False
+    return True
 
