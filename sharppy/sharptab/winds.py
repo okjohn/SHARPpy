@@ -376,7 +376,3 @@ def mbe_vectors(prof):
 
     '''
     return corfidi_mcs_motion(prof)
-
-
-
-

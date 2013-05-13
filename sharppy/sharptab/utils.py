@@ -302,4 +302,3 @@ def QC(val):
     '''
     if type(val) == type(ma.masked): return False
     return True
-

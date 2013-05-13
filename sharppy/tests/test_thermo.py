@@ -438,12 +438,3 @@ def test_relh():
     correct_t = 67.8069681577635
     returned_t = thermo.relh(input_p, input_t, input_td)
     npt.assert_almost_equal(returned_t, correct_t)
-
-
-
-
-
-
-
-
-

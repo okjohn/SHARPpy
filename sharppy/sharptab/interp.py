@@ -277,13 +277,3 @@ def generic_interp_pres(p, pres, field):
     not_masked = not_masked1 * not_masked2
     return np.interp(p, pres[not_masked], field[not_masked], left=ma.masked,
                      right=ma.masked)
-
-
-
-
-
-
-
-
-
-
