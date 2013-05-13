@@ -142,6 +142,45 @@ def test_lapse_rate():
     npt.assert_almost_equal(returned, correct)
 
 
+def test_most_unstable_layer():
+    correct = 976.0
+    returned = params.most_unstable_level(prof, exact=False)
+    npt.assert_almost_equal(returned, correct)
+
+    correct = 976.0
+    returned = params.most_unstable_level(prof, exact=True)
+    npt.assert_almost_equal(returned, correct)
 
 
+# def test_parcelx():
+#     pcl1 = params.parcelx(prof, flag=6)
+#     for prop, value in vars(pcl1).iteritems():
+#         if prop == 'lplvals':
+#             print 'lplvals.desc: ', value.desc
+#             print 'lplvals.pres: ', value.pres
+#             print 'lplvals.tmpc: ', value.tmpc
+#             print 'lplvals.dwpc: ', value.dwpc
+#         else:
+#             print prop, ": ", value
 
+#     # pcl2 = params.parcelx(prof, flag=2)
+#     # pcl3 = params.parcelx(prof, flag=3)
+#     # pcl4 = params.parcelx(prof, flag=4)
+
+#     # pcl11 = params.parcelx(prof2, flag=1)
+#     # pcl22 = params.parcelx(prof2, flag=2)
+#     # pcl33 = params.parcelx(prof2, flag=3)
+#     # pcl44 = params.parcelx(prof2, flag=4)
+
+#     # print pcl1.bplus, pcl2.bplus, pcl3.bplus, pcl4.bplus
+#     # print pcl11.bplus, pcl22.bplus, pcl33.bplus, pcl44.bplus
+
+
+def test_effective_inflow_layer():
+    mupcl = params.parcelx(prof, flag=3)
+    params.effective_inflow_layer(prof, mupcl=mupcl)
+
+    params.effective_inflow_layer(prof)
+
+    prof.mupcl = mupcl
+    params.effective_inflow_layer(prof)
