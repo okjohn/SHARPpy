@@ -11,6 +11,7 @@ __all__ += ['k_index', 't_totals', 'c_totals', 'v_totals', 'precip_water']
 __all__ += ['temp_lvl', 'max_temp', 'mean_mixratio', 'mean_theta']
 __all__ += ['lapse_rate', 'most_unstable_level', 'parcelx', 'bulk_rich']
 __all__ += ['bunkers_storm_motion', 'effective_inflow_layer']
+__all__ += ['convective_temp']
 
 
 class DefineParcel(object):
@@ -1210,3 +1211,50 @@ def bunkers_storm_motion(prof, **kwargs):
         rstu, rstv, lstu, lstv = winds.non_parcel_bunkers_motion(prof)
 
     return rstu, rstv, lstu, lstv
+
+
+def convective_temp(prof, **kwargs):
+    '''
+    Computes the convective temperature, assuming no change in the moisture
+    profile. Parcels are iteratively lifted until only mincinh is left as a
+    cap. The first guess is the observed surface temperature.
+
+    Parameters
+    ----------
+    prof : profile object
+        Profile Object
+    mincinh : parcel object (optional; default -1)
+        Amount of CINH left at CI
+    pres : number (optional)
+        Pressure of parcel to lift (hPa)
+    tmpc : number (optional)
+        Temperature of parcel to lift (C)
+    dwpc : number (optional)
+        Dew Point of parcel to lift (C)
+
+    Returns
+    -------
+    Convective Temperature (float) in degrees C
+
+    '''
+    mincinh = kwargs.get('mincinh', -1.)
+    mmr = mean_mixratio(prof)
+    pres = kwargs.get('pres', prof.pres[prof.sfc])
+    tmpc = kwargs.get('tmpc', prof.tmpc[prof.sfc])
+    dwpc = kwargs.get('dwpc', thermo.temp_at_mixrat(mmr, pres))
+
+    # Do a quick search to fine whether to continue. If you need to heat
+    # up more than 25C, don't compute.
+    pcl = parcelx(prof, flag=5, pres=pres, tmpc=tmpc+25., dwpc=dwpc)
+    if pcl.bplus == 0. or pcl.bminus < mincinh: return ma.masked
+
+    excess = dwpc - tmpc
+    if excess > 0: tmpc = tmpc + excess + 4.
+    pcl = parcelx(prof, flag=5, pres=pres, tmpc=tmpc, dwpc=dwpc)
+    if pcl.bplus == 0.: pcl.bminus = ma.masked
+    while pcl.bminus < mincinh:
+        if pcl.bminus < -100: tmpc += 2.
+        else: tmpc += 0.5
+        pcl = parcelx(prof, flag=5, pres=pres, tmpc=tmpc, dwpc=dwpc)
+        if pcl.bplus == 0.: pcl.bminus = ma.masked
+    return thermo.ctof(tmpc)
