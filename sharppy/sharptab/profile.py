@@ -88,6 +88,7 @@ class Profile(object):
         self.u.set_fill_value(self.missing)
         self.v.set_fill_value(self.missing)
         self.sfc = self.get_sfc()
+        self.top = self.pres.shape[0]
 
 
     def get_sfc(self):
@@ -106,4 +107,3 @@ class Profile(object):
 
         '''
         return np.where(~self.tmpc.mask)[0].min()
-
