@@ -187,6 +187,6 @@ prof2 = test_profile.prof2
 
 
 def test_convective_temp():
-    correct = 73.76
+    correct = 23.2
     returned = params.convective_temp(prof)
     npt.assert_almost_equal(returned, correct)

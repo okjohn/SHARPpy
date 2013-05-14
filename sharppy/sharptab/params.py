@@ -1257,4 +1257,4 @@ def convective_temp(prof, **kwargs):
         else: tmpc += 0.5
         pcl = parcelx(prof, flag=5, pres=pres, tmpc=tmpc, dwpc=dwpc)
         if pcl.bplus == 0.: pcl.bminus = ma.masked
-    return thermo.ctof(tmpc)
+    return tmpc
